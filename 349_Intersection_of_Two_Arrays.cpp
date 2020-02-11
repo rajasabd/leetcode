@@ -2,28 +2,16 @@ class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) 
     {
-         unordered_map<int,int> table;
-         vector<int> result;
-
-         for(int i:nums1)
-         {
-            table[i]++;
-         }
-
+        vector<int> result;
+        
+         if(nums1.empty() || nums2.empty())
+             return result;
+        
+         unordered_set<int> table(nums1.begin(), nums1.end());
          for(int i:nums2)
          {
-             if((table.count(i) == 1))
+             if(table.erase(i) > 0)
              { 
-                 int found = 0;
-                 for(int x:result)
-                 {
-                      if(x == i)
-                      {  
-                          found = 1;
-                          break;
-                      }   
-                  }
-                 if( found == 0) 
                  result.push_back(i);
              }
          }
